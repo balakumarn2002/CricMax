@@ -19,9 +19,9 @@ builder.Services.AddDbContext<CricketContext>(options =>
 
 // Add services to the container.
 #region Register Services
-builder.Services.AddTransient<IEmployee, EmployeeService>();
-builder.Services.AddTransient<ISalary, SalaryService>();
-builder.Services.AddTransient<IDepartment, DepartmentService>();
+//builder.Services.AddTransient<IEmployee, EmployeeService>();
+//builder.Services.AddTransient<ISalary, SalaryService>();
+//builder.Services.AddTransient<IDepartment, DepartmentService>();
 #endregion
 
 builder.Services.AddControllers();
