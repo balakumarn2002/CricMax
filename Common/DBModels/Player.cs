@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IPL.Models;
+namespace IPL.Common.DBModels;
 
-public partial class Team
+public partial class Player
 {
-    public int TeamSeq { get; set; }
+    public int PlayerSeq { get; set; }
 
-    public string? TeamName { get; set; }
+    public string? PlayerName { get; set; }
 
-    public int? NoOfPlayers { get; set; }
+    public int? JerseyNo { get; set; }
 
-    public string? TeamSponsor { get; set; }
+    public string? Country { get; set; }
 
-    public string? TeamStadium { get; set; }
-
-    public int? NoOfTrophy { get; set; }
-
-    public int? IplSeq { get; set; }
+    public string? ForeignerFl { get; set; }
 
     public decimal? CreatedBySeq { get; set; }
 
@@ -28,8 +24,6 @@ public partial class Team
     public DateTime? ModifiedDtTm { get; set; }
 
     public decimal? RecorVer { get; set; }
-
-    public virtual Ipl? IplSeqNavigation { get; set; }
 
     public virtual ICollection<PlayerPurchase> PlayerPurchases { get; set; } = new List<PlayerPurchase>();
 }

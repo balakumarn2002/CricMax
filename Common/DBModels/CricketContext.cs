@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace IPL.Models;
+namespace IPL.Common.DBModels;
 
 public partial class CricketContext : DbContext
 {

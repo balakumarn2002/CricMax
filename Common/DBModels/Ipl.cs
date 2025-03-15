@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IPL.Models;
+namespace IPL.Common.DBModels;
 
 public partial class Ipl
 {

@@ -1,6 +1,6 @@
-using IPL.Models;
+using IPL.Common.DBModels;
+using IPL.Common.Models;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models; // Change based on your project namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
