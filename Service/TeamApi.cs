@@ -1,5 +1,7 @@
-﻿using IPL.Common.DBModels;
+﻿using Aveon.CMS.Model;
+using IPL.Common.DBModels;
 using IPL.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace IPL.Service
 {
@@ -12,18 +14,91 @@ namespace IPL.Service
             _cricketContext = cricketContext;
         }
 
-        public Task<Team> GetAsync(int teamId)
+        public async Task<ICollection<Common.Models.Team>> GetAsync(int teamId)
         {
-            throw new NotImplementedException();
-        }
-        public Task<string> DeleteAsync(int teamId)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                var teams = await (from t in _cricketContext.Teams.AsNoTracking()
+                                   where t.TeamSeq == teamId
+                                   select new Common.Models.Team
+                                   {
+                                       IplSeq = t.IplSeq,
+                                       TeamName = t.TeamName,
+                                       TeamSeq = t.TeamSeq,
+                                       NoOfPlayers = t.NoOfPlayers,
+                                       TeamSponsor = t.TeamSponsor,
+                                       TeamStadium = t.TeamStadium
+                                   }).ToListAsync();
+
+                return teams;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occured while getting team", ex);
+            }
         }
 
-                public Task<string> SaveAsync(Team team)
+        public async Task<ApiResult<string>> SaveAsync(Common.Models.Team team)
         {
-            throw new NotImplementedException();
+            var result = new ApiResult<string>();
+
+            try
+            {
+                var dbTeam = await _cricketContext.Teams.Where(i => i.TeamSeq == team.TeamSeq).FirstOrDefaultAsync();
+
+                if (dbTeam == null)
+                {
+                    dbTeam.CreatedBySeq = 1;
+                    dbTeam.CreatedByDtTm = DateTime.Now;
+                    _cricketContext.Teams.Add(dbTeam);
+                }
+                else if (dbTeam.RecorVer != team.RecorVersion)
+                {
+                    throw new Exception("Record version mismatch, please refresh the page and continue the process.");
+                }
+
+                dbTeam.ModifiedDtTm = DateTime.Now;
+                dbTeam.ModifiedBySeq = 1;
+                dbTeam.TeamName = team.TeamName;
+                dbTeam.TeamSponsor = team.TeamSponsor;
+                dbTeam.TeamStadium = team.TeamStadium;
+                dbTeam.NoOfPlayers = team.NoOfPlayers;
+                dbTeam.NoOfTrophy = team.NoOfTrophy;
+                dbTeam.IplSeq = team.IplSeq;
+
+                await _cricketContext.SaveChangesAsync();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while saving", ex);
+            }
+        }
+
+        public async Task<ApiResult<string>> DeleteAsync(int teamId)
+        {
+            var result = new ApiResult<string>();
+
+            try
+            {
+                var dbTeam = await _cricketContext.Teams.FirstOrDefaultAsync(i => i.TeamSeq == teamId);
+
+                if (dbTeam == null)
+                {
+                    throw new Exception("The team is not found");
+
+                }
+                _cricketContext.Remove(dbTeam);
+
+                return result;
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while deleting", ex);
+            }
         }
     }
 }

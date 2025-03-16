@@ -19,15 +19,15 @@ public partial class Team
 
     public int? IplSeq { get; set; }
 
-    public decimal? CreatedBySeq { get; set; }
+    public decimal CreatedBySeq { get; set; }
 
-    public DateTime? CreatedByDtTm { get; set; }
+    public DateTime CreatedByDtTm { get; set; }
 
-    public decimal? ModifiedBySeq { get; set; }
+    public decimal ModifiedBySeq { get; set; }
 
-    public DateTime? ModifiedDtTm { get; set; }
+    public DateTime ModifiedDtTm { get; set; }
 
-    public decimal? RecorVer { get; set; }
+    public decimal RecorVer { get; set; }
 
     public virtual Ipl? IplSeqNavigation { get; set; }
 

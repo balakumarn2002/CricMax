@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
 #endregion 
 
 #region Configure Database Connection
-var connectionString = builder.Configuration.GetConnectionString("CricketDB");
+var connectionString = builder.Configuration.GetConnectionString("Cricket");
 builder.Services.AddDbContext<CricketContext>(options =>
     options.UseSqlServer(connectionString));
 #endregion
