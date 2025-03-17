@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IPL.Common.DBModels;
+namespace IPL.Models;
 
 public partial class Team
 {
@@ -19,15 +19,15 @@ public partial class Team
 
     public int? IplSeq { get; set; }
 
-    public decimal CreatedBySeq { get; set; }
+    public decimal? CreatedBySeq { get; set; }
 
-    public DateTime CreatedByDtTm { get; set; }
+    public DateTime? CreatedByDtTm { get; set; }
 
-    public decimal ModifiedBySeq { get; set; }
+    public decimal? ModifiedBySeq { get; set; }
 
-    public DateTime ModifiedDtTm { get; set; }
+    public DateTime? ModifiedDtTm { get; set; }
 
-    public decimal RecorVer { get; set; }
+    public byte[] RecorVer { get; set; } = null!;
 
     public virtual Ipl? IplSeqNavigation { get; set; }
 

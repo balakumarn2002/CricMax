@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace IPL.Common.DBModels;
+namespace IPL.Models;
 
 public partial class CricketContext : DbContext
 {
@@ -180,7 +180,8 @@ public partial class CricketContext : DbContext
             entity.Property(e => e.NoOfPlayers).HasColumnName("No_Of_Players");
             entity.Property(e => e.NoOfTrophy).HasColumnName("No_Of_Trophy");
             entity.Property(e => e.RecorVer)
-                .HasColumnType("numeric(10, 0)")
+                .IsRowVersion()
+                .IsConcurrencyToken()
                 .HasColumnName("Recor_Ver");
             entity.Property(e => e.TeamName)
                 .HasMaxLength(50)

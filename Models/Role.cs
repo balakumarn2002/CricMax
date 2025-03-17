@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IPL.Common.DBModels;
+namespace IPL.Models;
 
 public partial class Role
 {

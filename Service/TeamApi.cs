@@ -1,7 +1,7 @@
-﻿using Aveon.CMS.Model;
-using IPL.Common.DBModels;
+﻿using IPL.Models;
 using IPL.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Aveon.CMS.Model;
 
 namespace IPL.Service
 {
@@ -27,7 +27,8 @@ namespace IPL.Service
                                        TeamSeq = t.TeamSeq,
                                        NoOfPlayers = t.NoOfPlayers,
                                        TeamSponsor = t.TeamSponsor,
-                                       TeamStadium = t.TeamStadium
+                                       TeamStadium = t.TeamStadium,
+                                       NoOfTrophy = t.NoOfTrophy
                                    }).ToListAsync();
 
                 return teams;
@@ -48,13 +49,10 @@ namespace IPL.Service
 
                 if (dbTeam == null)
                 {
+                    dbTeam = new Team();
                     dbTeam.CreatedBySeq = 1;
                     dbTeam.CreatedByDtTm = DateTime.Now;
                     _cricketContext.Teams.Add(dbTeam);
-                }
-                else if (dbTeam.RecorVer != team.RecorVersion)
-                {
-                    throw new Exception("Record version mismatch, please refresh the page and continue the process.");
                 }
 
                 dbTeam.ModifiedDtTm = DateTime.Now;

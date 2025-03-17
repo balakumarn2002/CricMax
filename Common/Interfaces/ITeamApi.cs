@@ -1,5 +1,5 @@
 ﻿using Aveon.CMS.Model;
-using IPL.Common.DBModels;
+using IPL.Common.Models;
 
 namespace IPL.Common.Interfaces
 {

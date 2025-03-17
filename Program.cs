@@ -1,5 +1,6 @@
-using IPL.Common.DBModels;
-using IPL.Common.Models;
+using IPL.Models;
+using IPL.Common.Interfaces;
+using IPL.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,14 +13,14 @@ builder.Services.AddCors(options =>
 #endregion 
 
 #region Configure Database Connection
-var connectionString = builder.Configuration.GetConnectionString("Cricket");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CricketContext>(options =>
     options.UseSqlServer(connectionString));
 #endregion
 
 // Add services to the container.
 #region Register Services
-//builder.Services.AddTransient<IEmployee, EmployeeService>();
+builder.Services.AddTransient<ITeamApi, TeamApi>();
 //builder.Services.AddTransient<ISalary, SalaryService>();
 //builder.Services.AddTransient<IDepartment, DepartmentService>();
 #endregion

@@ -1,5 +1,4 @@
-﻿using IPL.Common.DBModels;
-
+﻿
 namespace IPL.Common.Models
 {
     public class Ipl
